@@ -1,0 +1,92 @@
+[
+  {
+    "id": "p001",
+    "name": "Wireless Keyboard",
+    "category": "Tech",
+    "price": 79.99,
+    "cost": 45.00,
+    "supplier": "TechGear Inc.",
+    "stock": 150
+  },
+  {
+    "id": "p002",
+    "name": "Ergonomic Mouse",
+    "category": "Tech",
+    "price": 49.99,
+    "cost": 25.50,
+    "supplier": "Peripherals Plus",
+    "stock": 200
+  },
+  {
+    "id": "p003",
+    "name": "High-Speed HDMI Cable",
+    "category": "Tech",
+    "price": 19.99,
+    "cost": 8.00,
+    "supplier": "CableConnect",
+    "stock": 300
+  },
+  {
+    "id": "p004",
+    "name": "Noise-Cancelling Headphones",
+    "category": "Tech",
+    "price": 149.99,
+    "cost": 80.00,
+    "supplier": "Audio Excellence",
+    "stock": 100
+  },
+  {
+    "id": "p005",
+    "name": "Portable Bluetooth Speaker",
+    "category": "Tech",
+    "price": 59.99,
+    "cost": 30.00,
+    "supplier": "SoundWave",
+    "stock": 180
+  },
+  {
+    "id": "p006",
+    "name": "Laptop Stand with Cooling Pad",
+    "category": "Tech",
+    "price": 39.99,
+    "cost": 20.00,
+    "supplier": "Laptop Essentials",
+    "stock": 120
+  },
+  {
+    "id": "p007",
+    "name": "Ultra-Thin Phone Case",
+    "category": "Tech",
+    "price": 14.99,
+    "cost": 6.00,
+    "supplier": "Mobile Accessories",
+    "stock": 500
+  },
+  {
+    "id": "p008",
+    "name": "Screen Protector (2-pack)",
+    "category": "Tech",
+    "price": 9.99,
+    "cost": 3.50,
+    "supplier": "ScreenGuard",
+    "stock": 400
+  },
+  {
+    "id": "p009",
+    "name": "Fast Wireless Charger",
+    "category": "Tech",
+    "price": 29.99,
+    "cost": 15.00,
+    "supplier": "PowerUp",
+    "stock": 150
+  },
+  {
+    "id": "p010",
+    "name": "USB-C to Lightning Cable",
+    "category": "Tech",
+    "price": 12.99,
+    "cost": 5.00,
+    "supplier": "CableConnect",
+    "stock": 250
+  }
+]
