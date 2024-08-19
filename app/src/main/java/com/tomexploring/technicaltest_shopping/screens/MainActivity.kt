@@ -23,8 +23,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tomexploring.product.Basket
 import com.tomexploring.product.Discount
+import com.tomexploring.product.DiscountType
 import com.tomexploring.product.Product
-import com.tomexploring.product.Type
 import com.tomexploring.technicaltest_shopping.R
 import com.tomexploring.technicaltest_shopping.cards.ProductCard
 import com.tomexploring.technicaltest_shopping.ui.theme.Technicaltest_shoppingTheme
@@ -34,24 +34,24 @@ class MainActivity : ComponentActivity() {
     private val discounts = mutableListOf(
         Discount().apply {
             this.name = "Buy 2 Get 1 Free Coffee"
-            this.type = Type.multipurchase
+            this.discountType = DiscountType.multipurchase
             this.productIds = listOf("g010")
         },
         Discount().apply {
             this.name = "25% Off Pasta"
-            this.type = Type.product
+            this.discountType = DiscountType.product
             this.productIds = listOf("g008")
             this.percentageDiscount = 0.25f
         },
         Discount().apply {
             this.name = "Egg, Bread, Beef Combination Fiver"
-            this.type = Type.combination
+            this.discountType = DiscountType.combination
             this.productIds = listOf("g003", "g004", "g005")
             this.setPrice = 5.0
         },
         Discount().apply {
             this.name = "5% Off Basket"
-            this.type = Type.basket
+            this.discountType = DiscountType.basket
             this.percentageDiscount = 0.05f
         }
     )

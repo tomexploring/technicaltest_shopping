@@ -43,8 +43,8 @@ class Basket(
             val discountedProducts = mutableListOf<Product>()
             var discountedTotal = 0.0
 
-            when (discount.type) {
-                Type.combination -> {
+            when (discount.discountType) {
+                DiscountType.combination -> {
                     val toCheckDiscount =
                         arrayOf(mutableListOf(), mutableListOf(), mutableListOf<Product>())
 
@@ -72,7 +72,7 @@ class Basket(
                     }
                 }
 
-                Type.multipurchase -> {
+                DiscountType.multipurchase -> {
                     var toCheckDiscount = toDiscount.filter { product ->
                         discount.productIds?.contains(product.id) == true
                     }
@@ -84,7 +84,7 @@ class Basket(
                     }
                 }
 
-                Type.product -> {
+                DiscountType.product -> {
                     toDiscount.forEach product@{ product ->
                         // Check to see if this product is part of the discount.
                         if (discount.productIds?.contains(product.id) == true) {
@@ -95,7 +95,7 @@ class Basket(
                     }
                 }
 
-                Type.basket -> {
+                DiscountType.basket -> {
                     toDiscount.forEach product@{ product ->
                         // Discount the product, as a basket discount.
                         discountedProducts.add(product)

@@ -6,7 +6,7 @@ import java.util.Locale
 
 class Product {
 
-    val id: String = ""
+    var id: String = ""
     var name: String? = null
     var price: Double? = null
     var category: String? = null
