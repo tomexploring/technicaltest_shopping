@@ -7,7 +7,7 @@ class Discount {
     var name: String? = null
     var start: Instant? = null
     var end: Instant? = null
-    var type: Type? = null
+    var discountType: DiscountType? = null
     var productIds: List<String>? = null
     var percentageDiscount: Float? = null
     var setPrice: Double? = null
@@ -19,4 +19,4 @@ class Discount {
         DbLoader.loadItems(Array<Discount>::class.java, *path)
 }
 
-enum class Type { multipurchase, combination, product, basket }
+enum class DiscountType { multipurchase, combination, product, basket }
