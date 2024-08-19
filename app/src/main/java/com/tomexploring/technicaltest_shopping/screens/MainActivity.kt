@@ -95,7 +95,7 @@ class MainActivity : ComponentActivity() {
                     items(products) { product ->
                         Log.v("COMPOSE", "This get rendered ${product.name}")
                         ProductCard(product = product, onClick = {
-                            basketProducts.add(product)
+                            basketProducts.add(product.copy())
                             basket.updateAppliedDiscounts()
                         })
                     }
@@ -131,6 +131,7 @@ class MainActivity : ComponentActivity() {
                     }
                 }
                 Row(horizontalArrangement = Arrangement.End) {
+                    Spacer(modifier = Modifier.weight(1f))
                     Text(text = "Final: £${basket.getFinalTotalString()}")
                 }
             }

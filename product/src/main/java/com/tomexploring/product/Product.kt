@@ -1,5 +1,6 @@
 package com.tomexploring.product
 
+import com.google.gson.Gson
 import java.nio.file.Path
 import java.util.Locale
 
@@ -20,4 +21,9 @@ class Product {
 
     fun load(vararg path: Path): List<Product> =
         DbLoader.loadItems(Array<Product>::class.java, *path)
+
+    fun copy(): Product {
+        val gson = Gson()
+        return gson.fromJson(gson.toJson(this), Product::class.java)
+    }
 }

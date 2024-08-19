@@ -34,8 +34,10 @@ class Basket(
     fun updateAppliedDiscounts(): List<Triple<Discount, List<Product>, Double>> {
         appliedDiscounts.clear()
 
+        var toDiscount = products.toMutableList()
+
         // Sort the discounts so that the are applied in the correct order.
-        discounts.sortBy { it.type?.ordinal }
+//        discounts.sortBy { it.type?.ordinal }
 
         discounts.forEach { discount ->
             val discountedProducts = mutableListOf<Product>()
@@ -46,7 +48,7 @@ class Basket(
                     val toCheckDiscount =
                         arrayOf(mutableListOf(), mutableListOf(), mutableListOf<Product>())
 
-                    notDiscountedProducts().forEach product@{ product ->
+                    toDiscount.forEach product@{ product ->
                         if (discount.productIds?.contains(product.id) == true) {
                             toCheckDiscount[discount.productIds!!.indexOf(product.id)].add(product)
                         }
@@ -71,25 +73,19 @@ class Basket(
                 }
 
                 Type.multipurchase -> {
-                    val toCheckDiscount = mutableListOf<Product>()
-
-                    notDiscountedProducts().forEach product@{ product ->
-                        if (discount.productIds?.contains(product.id) == true) {
-                            toCheckDiscount.add(product)
-                        }
+                    var toCheckDiscount = toDiscount.filter { product ->
+                        discount.productIds?.contains(product.id) == true
                     }
 
-                    // Check to see if we have enough to discount, and how many to discount.
-                    val freeProducts: Int = toCheckDiscount.size / 3
-
-                    if (freeProducts > 0) {
+                    while (toCheckDiscount.size >= 3) {
                         discountedProducts.addAll(toCheckDiscount.take(3))
-                        discountedTotal += (toCheckDiscount[0].cost ?: 0.0) * freeProducts
+                        discountedTotal += (toCheckDiscount[0].cost ?: 0.0)
+                        toCheckDiscount = toCheckDiscount.drop(3).toMutableList()
                     }
                 }
 
                 Type.product -> {
-                    notDiscountedProducts().forEach product@{ product ->
+                    toDiscount.forEach product@{ product ->
                         // Check to see if this product is part of the discount.
                         if (discount.productIds?.contains(product.id) == true) {
                             discountedProducts.add(product)
@@ -100,7 +96,7 @@ class Basket(
                 }
 
                 Type.basket -> {
-                    notDiscountedProducts().forEach product@{ product ->
+                    toDiscount.forEach product@{ product ->
                         // Discount the product, as a basket discount.
                         discountedProducts.add(product)
                         discountedTotal += (product.cost ?: 0.0) * (discount.percentageDiscount
@@ -115,20 +111,11 @@ class Basket(
 
             if (discountedProducts.isNotEmpty()) {
                 appliedDiscounts.add(Triple(discount, discountedProducts, discountedTotal))
+                toDiscount.removeAll(discountedProducts)
             }
         }
 
         return appliedDiscounts.toList()
-    }
-
-    private fun notDiscountedProducts(): List<Product> {
-        return products.filterNot { product ->
-            appliedDiscounts.any { discount ->
-                discount.second.contains(
-                    product
-                )
-            }
-        }
     }
 
     private fun getSubTotal() = products.sumOf { it.cost ?: 0.0 }
@@ -138,6 +125,6 @@ class Basket(
     fun getAppliedDiscountTotalString() =
         String.format(Locale.getDefault(), "%.2f", getAppliedDiscountTotal())
 
-    private fun getFinalTotal() = getSubTotal() - updateAppliedDiscounts().sumOf { it.third }
+    private fun getFinalTotal() = getSubTotal() - getAppliedDiscounts().sumOf { it.third }
     fun getFinalTotalString() = String.format(Locale.getDefault(), "%.2f", getFinalTotal())
 }
